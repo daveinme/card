@@ -1,0 +1,7 @@
+# Nessuna dipendenza Python richiesta per Linux
+# Il programma usa solo librerie standard Python
+
+# Per le notifiche Linux, installa il pacchetto di sistema:
+# Ubuntu/Debian: sudo apt install libnotify-bin
+# Fedora: sudo dnf install libnotify
+# Arch: sudo pacman -S libnotify
