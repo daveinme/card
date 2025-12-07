@@ -1,0 +1,44 @@
+{
+  "prints": [
+    {
+      "timestamp": "2025-12-07T01:58:35.304300",
+      "date": "2025-12-07",
+      "time": "01:58:35",
+      "num_photos": 3,
+      "layout": "1",
+      "printer": "Microsoft Print to PDF"
+    },
+    {
+      "timestamp": "2025-12-07T01:58:56.793150",
+      "date": "2025-12-07",
+      "time": "01:58:56",
+      "num_photos": 1,
+      "layout": "1",
+      "printer": "Microsoft Print to PDF"
+    },
+    {
+      "timestamp": "2025-12-07T02:02:47.770168",
+      "date": "2025-12-07",
+      "time": "02:02:47",
+      "num_photos": 4,
+      "layout": "10x15",
+      "printer": "Microsoft Print to PDF"
+    },
+    {
+      "timestamp": "2025-12-07T02:03:46.103384",
+      "date": "2025-12-07",
+      "time": "02:03:46",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "Microsoft Print to PDF"
+    },
+    {
+      "timestamp": "2025-12-07T02:04:07.166184",
+      "date": "2025-12-07",
+      "time": "02:04:07",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "Microsoft Print to PDF"
+    }
+  ]
+}
