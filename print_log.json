@@ -1,44 +1,300 @@
 {
   "prints": [
     {
-      "timestamp": "2025-12-07T01:58:35.304300",
+      "timestamp": "2025-12-07T16:03:27.351998",
       "date": "2025-12-07",
-      "time": "01:58:35",
-      "num_photos": 3,
-      "layout": "1",
-      "printer": "Microsoft Print to PDF"
-    },
-    {
-      "timestamp": "2025-12-07T01:58:56.793150",
-      "date": "2025-12-07",
-      "time": "01:58:56",
-      "num_photos": 1,
-      "layout": "1",
-      "printer": "Microsoft Print to PDF"
-    },
-    {
-      "timestamp": "2025-12-07T02:02:47.770168",
-      "date": "2025-12-07",
-      "time": "02:02:47",
-      "num_photos": 4,
-      "layout": "10x15",
-      "printer": "Microsoft Print to PDF"
-    },
-    {
-      "timestamp": "2025-12-07T02:03:46.103384",
-      "date": "2025-12-07",
-      "time": "02:03:46",
+      "time": "16:03:27",
       "num_photos": 1,
       "layout": "15x20",
-      "printer": "Microsoft Print to PDF"
+      "printer": "d-COLOR MF2624 plus"
     },
     {
-      "timestamp": "2025-12-07T02:04:07.166184",
+      "timestamp": "2025-12-07T16:04:43.537584",
       "date": "2025-12-07",
-      "time": "02:04:07",
+      "time": "16:04:43",
       "num_photos": 1,
       "layout": "15x20",
-      "printer": "Microsoft Print to PDF"
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T16:05:28.720197",
+      "date": "2025-12-07",
+      "time": "16:05:28",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T16:06:31.273931",
+      "date": "2025-12-07",
+      "time": "16:06:31",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T16:12:35.099184",
+      "date": "2025-12-07",
+      "time": "16:12:35",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T16:26:50.827950",
+      "date": "2025-12-07",
+      "time": "16:26:50",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T16:37:49.204632",
+      "date": "2025-12-07",
+      "time": "16:37:49",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T16:43:00.696960",
+      "date": "2025-12-07",
+      "time": "16:43:00",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T16:43:57.861983",
+      "date": "2025-12-07",
+      "time": "16:43:57",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:12:53.356676",
+      "date": "2025-12-07",
+      "time": "17:12:53",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:14:17.334057",
+      "date": "2025-12-07",
+      "time": "17:14:17",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:16:42.835784",
+      "date": "2025-12-07",
+      "time": "17:16:42",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:21:30.969662",
+      "date": "2025-12-07",
+      "time": "17:21:30",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:24:13.798012",
+      "date": "2025-12-07",
+      "time": "17:24:13",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:39:34.830405",
+      "date": "2025-12-07",
+      "time": "17:39:34",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:39:58.778889",
+      "date": "2025-12-07",
+      "time": "17:39:58",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:41:18.129589",
+      "date": "2025-12-07",
+      "time": "17:41:18",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:41:39.652311",
+      "date": "2025-12-07",
+      "time": "17:41:39",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:42:17.183562",
+      "date": "2025-12-07",
+      "time": "17:42:17",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:43:32.197346",
+      "date": "2025-12-07",
+      "time": "17:43:32",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:45:26.016027",
+      "date": "2025-12-07",
+      "time": "17:45:26",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:48:13.781107",
+      "date": "2025-12-07",
+      "time": "17:48:13",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:48:49.957213",
+      "date": "2025-12-07",
+      "time": "17:48:49",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:52:22.045245",
+      "date": "2025-12-07",
+      "time": "17:52:22",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:54:36.944788",
+      "date": "2025-12-07",
+      "time": "17:54:36",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:56:43.141373",
+      "date": "2025-12-07",
+      "time": "17:56:43",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T17:58:54.178917",
+      "date": "2025-12-07",
+      "time": "17:58:54",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:03:48.980317",
+      "date": "2025-12-07",
+      "time": "18:03:48",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:09:46.594321",
+      "date": "2025-12-07",
+      "time": "18:09:46",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:11:04.034874",
+      "date": "2025-12-07",
+      "time": "18:11:04",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:14:32.004063",
+      "date": "2025-12-07",
+      "time": "18:14:32",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:14:51.861238",
+      "date": "2025-12-07",
+      "time": "18:14:51",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:34:44.762079",
+      "date": "2025-12-07",
+      "time": "18:34:44",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:38:34.473255",
+      "date": "2025-12-07",
+      "time": "18:38:34",
+      "num_photos": 2,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:39:02.233621",
+      "date": "2025-12-07",
+      "time": "18:39:02",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:39:41.932437",
+      "date": "2025-12-07",
+      "time": "18:39:41",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
+    },
+    {
+      "timestamp": "2025-12-07T18:49:17.710480",
+      "date": "2025-12-07",
+      "time": "18:49:17",
+      "num_photos": 1,
+      "layout": "15x20",
+      "printer": "d-COLOR MF2624 plus (BYPASS)"
     }
   ]
 }

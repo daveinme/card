@@ -31,8 +31,8 @@ from professional_features import (
 )
 
 # ===== CONFIGURAZIONE =====
-DESTINATION_BASE = r"C:\Users\Dave\Desktop\sdcard\foto"
-SD_DRIVE_LETTER = "G"
+DESTINATION_BASE = r"C:\Users\Dave\Desktop\natale"
+SD_DRIVE_LETTER = "I"
 PHOTO_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.raw', '.cr2', '.nef', '.arw',
                     '.mp4', '.mov', '.avi', '.heic', '.dng'}
 
@@ -142,23 +142,30 @@ B = DESIGN['borders']
 
 class SecondaryDisplayWindow:
     """Finestra ULTRA-MINIMALE per secondo monitor - SOLO FOTO"""
-    
-    def __init__(self):
+
+    def __init__(self, main_window=None):
+        self.main_window = main_window  # Riferimento alla finestra principale
         self.window = tk.Toplevel()
         self.window.title("Visualizzatore Foto")
-        
+
         # Dimensioni grandi ma movibile
         self.window.geometry("1600x900")
         self.is_fullscreen = False
         self.window.configure(bg='#000000')  # Nero puro
-        
+
         # Shortcut (solo F11, ESC nascosti)
         self.window.bind('<F11>', lambda e: self.toggle_fullscreen())
         self.window.bind('<Escape>', lambda e: self.exit_fullscreen())
-        
+
         # Container principale - PADDING MINIMO
         main_container = tk.Frame(self.window, bg='#000000')
         main_container.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        # NUOVO: Indicatore pagina (minimale, in alto)
+        self.page_indicator = tk.Label(main_container, text="",
+                                       font=('Arial', 16, 'bold'),
+                                       fg='#ffffff', bg='#000000')
+        self.page_indicator.pack(pady=(0, 5))
         
         # Frame per griglia 3x3 (occupa TUTTO lo spazio)
         self.grid_frame = tk.Frame(main_container, bg='#000000')
@@ -203,7 +210,31 @@ class SecondaryDisplayWindow:
         self.current_photos = []
         self.current_page = 0
         self.total_pages = 0
-    
+
+        # Configura binding dopo che main_window è disponibile
+        if main_window:
+            self.setup_keyboard_bindings()
+
+    def setup_keyboard_bindings(self):
+        """Configura scorciatoie da tastiera per la finestra secondaria"""
+        if not self.main_window:
+            return
+
+        # Navigazione pagine
+        self.window.bind('<Left>', lambda e: self.main_window.prev_page())
+        self.window.bind('<Right>', lambda e: self.main_window.next_page())
+        self.window.bind('<Home>', lambda e: self.main_window.goto_page(0))
+        self.window.bind('<End>', lambda e: self.main_window.goto_last_page())
+
+        # Selezione foto con numeri 1-9
+        for num in range(1, 10):
+            self.window.bind(str(num), lambda e, n=num: self.main_window.select_photo_by_number(n))
+
+        # Altre scorciatoie utili
+        self.window.bind('<Control-a>', lambda e: self.main_window.select_all())
+        self.window.bind('<Control-d>', lambda e: self.main_window.deselect_all())
+        self.window.bind('<Control-f>', lambda e: self.main_window.toggle_filter())
+
     def toggle_fullscreen(self):
         """Attiva/disattiva fullscreen"""
         self.is_fullscreen = not self.is_fullscreen
@@ -222,10 +253,16 @@ class SecondaryDisplayWindow:
             display_photos = [p for p in all_photos if p in selected_photos]
         else:
             display_photos = all_photos
-        
+
         self.current_photos = display_photos
         self.current_page = current_page
         self.total_pages = (len(display_photos) + PHOTOS_PER_PAGE - 1) // PHOTOS_PER_PAGE
+
+        # Aggiorna indicatore pagina
+        if self.total_pages > 0:
+            self.page_indicator.config(text=f"Pagina {current_page + 1} / {self.total_pages}")
+        else:
+            self.page_indicator.config(text="")
         
         # Calcola foto da mostrare
         start_idx = current_page * PHOTOS_PER_PAGE
@@ -370,8 +407,8 @@ class MainControlWindow:
         # Cache per performance
         self.thumbnail_cache = {}
 
-        # Finestra secondaria
-        self.secondary_window = SecondaryDisplayWindow()
+        # Finestra secondaria (passa riferimento a self)
+        self.secondary_window = SecondaryDisplayWindow(main_window=self)
 
         # KEYBOARD SHORTCUTS
         self.setup_shortcuts()
@@ -513,9 +550,9 @@ class MainControlWindow:
 
         self.print_layout = tk.StringVar(value="15x20")
         layouts = [
-            ("15×20 cm", "15x20"),
-            ("10×15 cm", "10x15"),
-            ("9×13 cm", "9x13")
+            ("20×15 cm orizzontale", "15x20"),
+            ("15×10 cm orizzontale", "10x15"),
+            ("13×9 cm orizzontale", "9x13")
         ]
 
         for i, (text, value) in enumerate(layouts):
@@ -525,9 +562,9 @@ class MainControlWindow:
 
             # Aggiungi descrizione
             if value == "15x20":
-                desc = "1 foto per foglio"
-            elif value == "10x15":
                 desc = "2 foto per foglio"
+            elif value == "10x15":
+                desc = "4 foto per foglio"
             else:
                 desc = "4 foto per foglio"
 
@@ -734,6 +771,10 @@ class MainControlWindow:
         # Aiuto
         self.root.bind('<F1>', lambda e: self.show_shortcuts_help())
 
+        # Selezione foto con numeri 1-9
+        for num in range(1, 10):
+            self.root.bind(str(num), lambda e, n=num: self.select_photo_by_number(n))
+
     def add_tooltips(self):
         """Aggiunge tooltips a tutti i controlli"""
         # Tooltips per importazione
@@ -795,6 +836,9 @@ class MainControlWindow:
                 ("← (Freccia sinistra)", "Pagina precedente"),
                 ("Home", "Prima pagina"),
                 ("End", "Ultima pagina"),
+            ]),
+            ("SELEZIONE RAPIDA", [
+                ("1-9", "Seleziona foto nella griglia (1=in alto a sx, 9=in basso a dx)"),
             ]),
             ("STRUMENTI", [
                 ("Ctrl+P", "Stampa foto selezionate"),
@@ -1238,18 +1282,18 @@ class MainControlWindow:
     def toggle_photo_selection(self, idx):
         """Toggle selezione foto (ottimizzato)"""
         widget = self.thumbnail_widgets[idx]
-        
+
         if widget['photo_path'] is None:
             return
-        
+
         photo_path = widget['photo_path']
-        
+
         if photo_path in self.selected_photos:
             self.selected_photos.remove(photo_path)
             widget['photo_frame'].config(relief=tk.RAISED, borderwidth=2, bg='#ecf0f1')
             widget['photo_label'].config(bg='#ecf0f1')
             widget['num_label'].config(fg='#3498db')
-            
+
             # Se era l'ultima foto selezionata e il filtro è attivo, disattivalo
             if not self.selected_photos and self.show_only_selected:
                 self.show_only_selected = False
@@ -1261,22 +1305,34 @@ class MainControlWindow:
             widget['photo_frame'].config(relief=tk.SOLID, borderwidth=4, bg='#27ae60')
             widget['photo_label'].config(bg='#d5f4e6')
             widget['num_label'].config(fg='#27ae60')
-        
+
         # Aggiorna solo le label necessarie (non ricaricare tutto)
         if self.selected_photos:
             self.selection_label.config(text=f"{len(self.selected_photos)} foto selezionate")
         else:
             self.selection_label.config(text="0 foto selezionate")
-            
+
         self.print_btn.config(state=tk.NORMAL if self.selected_photos else tk.DISABLED)
         self.filter_btn.config(state=tk.NORMAL if self.selected_photos else tk.DISABLED)
-        
+
         # Se filtro attivo, aggiorna tutto (potrebbe cambiare cosa si vede)
         if self.show_only_selected:
             self.update_displays()
         else:
             # Altrimenti aggiorna solo finestra secondaria (non ricaricare miniature)
             self.secondary_window.update_display(self.all_photos, self.current_page, self.selected_photos, self.show_only_selected)
+
+    def select_photo_by_number(self, number):
+        """Seleziona foto tramite tastiera numerica (1-9)"""
+        if not self.all_photos:
+            return
+
+        # Converti numero (1-9) in indice griglia (0-8)
+        idx = number - 1
+
+        # Verifica che l'indice sia valido (0-8 per griglia 3x3)
+        if 0 <= idx < PHOTOS_PER_PAGE:
+            self.toggle_photo_selection(idx)
     
     def select_current_page(self):
         """Seleziona tutte le foto della pagina corrente"""
@@ -1690,15 +1746,15 @@ class MainControlWindow:
         # Ottieni formato selezionato
         photo_format = self.print_layout.get()
 
-        # Descrizioni formati
+        # Descrizioni formati (orientamento ORIZZONTALE)
         format_desc = {
-            "15x20": "15×20 cm (1 foto/foglio)",
-            "10x15": "10×15 cm (2 foto/foglio)",
-            "9x13": "9×13 cm (4 foto/foglio)"
+            "15x20": "20×15 cm orizzontale (2 foto/foglio)",
+            "10x15": "15×10 cm orizzontale (4 foto/foglio)",
+            "9x13": "13×9 cm orizzontale (4 foto/foglio)"
         }
 
         # Calcola numero fogli
-        photos_per_sheet = {"15x20": 1, "10x15": 2, "9x13": 4}[photo_format]
+        photos_per_sheet = {"15x20": 2, "10x15": 4, "9x13": 4}[photo_format]
         num_sheets = (len(self.selected_photos) + photos_per_sheet - 1) // photos_per_sheet
 
         if not messagebox.askyesno("Conferma Stampa",
@@ -1748,30 +1804,45 @@ class MainControlWindow:
                 def cm_to_pixels(cm, dpi):
                     return int(cm * 0.393701 * dpi)
 
-                # Definisci dimensioni foto in pixel per ogni formato
+                # Definisci dimensioni foto in pixel per ogni formato (ORIZZONTALE)
                 if photo_format == "15x20":
-                    photo_w = cm_to_pixels(15, dpi_x)
-                    photo_h = cm_to_pixels(20, dpi_y)
-                    positions = [(page_width // 2 - photo_w // 2, page_height // 2 - photo_h // 2)]
-                elif photo_format == "10x15":
-                    photo_w = cm_to_pixels(10, dpi_x)
+                    # 20×15 cm orizzontale - 2 foto verticali
+                    photo_w = cm_to_pixels(20, dpi_x)
                     photo_h = cm_to_pixels(15, dpi_y)
-                    margin_y = cm_to_pixels(2, dpi_y)  # Margine verticale
+                    # A4 è 29.7 cm alta, 2 foto da 15 cm = 30 cm -> margini minimi
+                    margin_y = cm_to_pixels(0.1, dpi_y)  # Margine minimo
+                    x_center = page_width // 2 - photo_w // 2
                     positions = [
-                        (page_width // 2 - photo_w // 2, margin_y),
-                        (page_width // 2 - photo_w // 2, page_height - photo_h - margin_y)
+                        (x_center, margin_y),  # Sopra
+                        (x_center, page_height - photo_h - margin_y)  # Sotto
+                    ]
+                elif photo_format == "10x15":
+                    # 15×10 cm orizzontale - 4 foto (2×2)
+                    photo_w = cm_to_pixels(15, dpi_x)
+                    photo_h = cm_to_pixels(10, dpi_y)
+                    margin_x = cm_to_pixels(0.5, dpi_x)
+                    margin_y = cm_to_pixels(0.5, dpi_y)
+                    spacing_x = (page_width - 2 * photo_w) // 2
+                    spacing_y = (page_height - 2 * photo_h) // 2
+                    positions = [
+                        (margin_x, margin_y),  # Top-left
+                        (page_width - photo_w - margin_x, margin_y),  # Top-right
+                        (margin_x, page_height - photo_h - margin_y),  # Bottom-left
+                        (page_width - photo_w - margin_x, page_height - photo_h - margin_y)  # Bottom-right
                     ]
                 else:  # 9x13
-                    photo_w = cm_to_pixels(9, dpi_x)
-                    photo_h = cm_to_pixels(13, dpi_y)
-                    margin = cm_to_pixels(1.5, dpi_x)
-                    spacing_x = (page_width - 2 * photo_w - 2 * margin) // 3
-                    spacing_y = (page_height - 2 * photo_h - 2 * margin) // 3
+                    # 13×9 cm orizzontale - 4 foto (2×2)
+                    photo_w = cm_to_pixels(13, dpi_x)
+                    photo_h = cm_to_pixels(9, dpi_y)
+                    margin_x = cm_to_pixels(0.5, dpi_x)
+                    margin_y = cm_to_pixels(1.5, dpi_y)
+                    spacing_x = (page_width - 2 * photo_w) // 2
+                    spacing_y = (page_height - 2 * photo_h) // 2
                     positions = [
-                        (margin + spacing_x, margin + spacing_y),
-                        (page_width - photo_w - margin - spacing_x, margin + spacing_y),
-                        (margin + spacing_x, page_height - photo_h - margin - spacing_y),
-                        (page_width - photo_w - margin - spacing_x, page_height - photo_h - margin - spacing_y)
+                        (margin_x, margin_y),  # Top-left
+                        (page_width - photo_w - margin_x, margin_y),  # Top-right
+                        (margin_x, page_height - photo_h - margin_y),  # Bottom-left
+                        (page_width - photo_w - margin_x, page_height - photo_h - margin_y)  # Bottom-right
                     ]
 
                 sheet_num = 0
@@ -1791,26 +1862,29 @@ class MainControlWindow:
                         if img.mode != 'RGB':
                             img = img.convert('RGB')
 
-                        # Ridimensiona mantenendo proporzioni (letterbox)
+                        # CROP invece di letterbox - riempie completamente i 15x20 cm
                         img_ratio = img.width / img.height
                         target_ratio = photo_w / photo_h
 
+                        # Ridimensiona per riempire completamente (una dimensione sarà più grande del target)
                         if img_ratio > target_ratio:
-                            # Foto più larga - limita per larghezza
-                            new_w = photo_w
-                            new_h = int(photo_w / img_ratio)
-                        else:
-                            # Foto più alta - limita per altezza
+                            # Foto più larga - scala per ALTEZZA (larghezza sarà maggiore, poi croppiamo)
                             new_h = photo_h
                             new_w = int(photo_h * img_ratio)
+                        else:
+                            # Foto più alta - scala per LARGHEZZA (altezza sarà maggiore, poi croppiamo)
+                            new_w = photo_w
+                            new_h = int(photo_w / img_ratio)
 
+                        # Ridimensiona
                         img_resized = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
 
-                        # Crea canvas nero per letterbox
-                        canvas = Image.new('RGB', (photo_w, photo_h), (255, 255, 255))
-                        offset_x = (photo_w - new_w) // 2
-                        offset_y = (photo_h - new_h) // 2
-                        canvas.paste(img_resized, (offset_x, offset_y))
+                        # Crop centrato per ottenere ESATTAMENTE photo_w x photo_h (15x20 cm in pixel)
+                        left = (new_w - photo_w) // 2
+                        top = (new_h - photo_h) // 2
+                        right = left + photo_w
+                        bottom = top + photo_h
+                        canvas = img_resized.crop((left, top, right, bottom))
 
                         # Salva come BMP temporaneo
                         temp_bmp = os.path.join(os.path.dirname(photo_path), f"temp_print_{i}.bmp")

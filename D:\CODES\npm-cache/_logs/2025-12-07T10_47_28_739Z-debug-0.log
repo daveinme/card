@@ -7,10 +7,10 @@
 6 silly config load:file:/home/dave/.nvm/versions/node/v22.17.0/etc/npmrc
 7 verbose title npm view @anthropic-ai/claude-code@latest version
 8 verbose argv "view" "@anthropic-ai/claude-code@latest" "version" "--prefer-online"
-9 verbose logfile logs-max:10 dir:/mnt/c/Users/Dave/Desktop/sdcard/card/D:\CODES\npm-cache/_logs/2025-12-07T00_47_24_211Z-
-10 verbose logfile /mnt/c/Users/Dave/Desktop/sdcard/card/D:\CODES\npm-cache/_logs/2025-12-07T00_47_24_211Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/mnt/c/Users/Dave/Desktop/sdcard/card/D:\CODES\npm-cache/_logs/2025-12-07T10_47_28_739Z-
+10 verbose logfile /mnt/c/Users/Dave/Desktop/sdcard/card/D:\CODES\npm-cache/_logs/2025-12-07T10_47_28_739Z-debug-0.log
 11 silly logfile done cleaning log files
-12 http fetch GET 200 https://registry.npmjs.org/@anthropic-ai%2fclaude-code 300ms (cache revalidated)
+12 http fetch GET 200 https://registry.npmjs.org/@anthropic-ai%2fclaude-code 274ms (cache revalidated)
 13 verbose cwd /mnt/c/Users/Dave/Desktop/sdcard/card
 14 verbose os Linux 6.6.87.2-microsoft-standard-WSL2
 15 verbose node v22.17.0
