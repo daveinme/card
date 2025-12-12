@@ -1,3 +1,16 @@
-pywin32
-plyer
-Pillow
+# SD Card Photo Importer - Dipendenze
+# Installare con: pip install -r requirements.txt
+
+# === CORE ===
+# Gestione immagini
+Pillow>=10.0.0
+
+# Stampante Windows
+pywin32>=306
+
+# Notifiche desktop
+plyer>=2.1.0
+
+# === UI ===
+# PySide6 (Qt) - Interfaccia grafica moderna e performante
+PySide6>=6.6.0

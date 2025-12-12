@@ -1,139 +1,176 @@
-# SD Card Photo Importer
+# SD Card Photo Importer - Professional Edition
 
-Programma per Windows e Linux che monitora automaticamente l'inserimento di schede SD e importa le foto in cartelle organizzate per data.
+Applicazione professionale per importare, visualizzare e stampare foto da schede SD.
 
-## Versioni disponibili
+## 🎯 Caratteristiche Principali
 
-- **Windows**: `sd_card_importer.py`
-- **Linux**: `sd_card_importer_linux.py`
+### ✨ Importazione Foto
+- Importazione automatica da scheda SD
+- Multi-threading per velocità massima
+- Modalità copia o taglia (sposta)
+- Organizzazione automatica per data
 
-## Funzionalità
+### 🖼️ Visualizzazione
+- Doppio monitor support (finestra principale + finestra visualizzazione)
+- Griglia 3x3 con 9 foto per pagina
+- Thumbnails ad alta qualità con cache
+- Navigazione veloce con tastiera
+- Selezione multipla foto
 
-- ✅ Rileva automaticamente quando viene inserita una scheda SD
-- ✅ Importa foto e video in cartelle con data + numero sequenziale (es: `2025-12-06_1`, `2025-12-06_2`)
-- ✅ Notifiche Windows all'inizio e alla fine dell'importazione
-- ✅ Supporta formati: JPG, PNG, RAW, CR2, NEF, ARW, MP4, MOV, HEIC, DNG, etc.
-- ✅ Gestisce file duplicati automaticamente
+### 🖨️ Stampa Professionale con Spooler Interno
+- **1 foto per foglio** (la stampante gestisce le dimensioni)
+- **Spooler interno**: attende che ogni foto sia completata prima di inviare la successiva
+- Monitora lo stato dei job di stampa in tempo reale
+- Report stampe con statistiche
+- Export CSV dello storico
 
-## Installazione
+### 🛡️ Sicurezza
+- Controllo integrità file prima di cancellare dalla SD
+- Verifica dimensioni e presenza file
+- Backup automatico
 
-### Windows
+## 📦 Installazione
 
-#### 1. Installa Python
-Scarica Python da [python.org](https://www.python.org/downloads/) (versione 3.8+)
+### Requisiti
+- Windows 10/11
+- Python 3.8 o superiore
+- Tkinter (incluso in Python)
 
-#### 2. Installa le dipendenze
-Apri il Prompt dei comandi nella cartella del progetto ed esegui:
+### Setup
 
+1. **Clona o scarica il progetto**
+```bash
+cd /path/to/sd_card_importer
+```
+
+2. **Installa le dipendenze**
 ```bash
 pip install -r requirements.txt
 ```
 
-#### 3. Configura il percorso di destinazione
-Apri `sd_card_importer.py` e modifica la riga 17:
-
+3. **Configura il programma**
+Modifica `config.py`:
 ```python
-DESTINATION_BASE = r"C:\Users\TuoNome\Pictures\SD_Import"
+DESTINATION_BASE = r"C:\Users\TuoNome\Desktop\foto"  # Cartella destinazione
+SD_DRIVE_LETTER = "D"  # Lettera dell'unità SD
 ```
 
-Sostituisci con il percorso completo dove vuoi salvare le foto.
-
-### Linux
-
-#### 1. Verifica Python
-Python è già installato nella maggior parte delle distro Linux (3.8+)
-
-#### 2. Installa notify-send (per notifiche)
-```bash
-# Ubuntu/Debian
-sudo apt install libnotify-bin
-
-# Fedora
-sudo dnf install libnotify
-
-# Arch
-sudo pacman -S libnotify
-```
-
-#### 3. Configura il percorso di destinazione
-Apri `sd_card_importer_linux.py` e modifica la riga 14:
-
-```python
-DESTINATION_BASE = os.path.expanduser("~/Pictures/SD_Import")
-```
-
-Puoi lasciare così (userà la tua home) oppure specificare un percorso assoluto.
-
-## Utilizzo
-
-### Linux (per testare)
-Apri il terminale ed esegui:
+## 🚀 Avvio
 
 ```bash
-python3 sd_card_importer_linux.py
+python sd_card_importer2.py
 ```
 
-### Windows
-Apri il Prompt dei comandi e esegui:
+## ⌨️ Scorciatoie da Tastiera
 
-```bash
-python sd_card_importer.py
-```
+### Navigazione
+- `←` / `→` - Pagina precedente/successiva
+- `Home` / `End` - Prima/ultima pagina
+- `1-9` - Seleziona foto (dalla finestra secondaria)
 
-Il programma rimarrà in esecuzione e monitorerà le schede SD. Premi `CTRL+C` per terminarlo.
+### Selezione
+- `Ctrl+A` - Seleziona tutte le foto
+- `Ctrl+D` - Deseleziona tutte
+- `Ctrl+F` - Mostra solo foto selezionate
 
-### Avvio automatico con Windows (opzionale)
+### Operazioni
+- `Ctrl+O` - Apri cartella
+- `Ctrl+H` - Vai a cartella base
+- `Ctrl+I` - Importa da SD
+- `Ctrl+P` - Stampa foto selezionate
+- `Ctrl+R` - Report stampe
 
-#### Metodo 1: Collegamento nella cartella Avvio
-1. Premi `Win+R` e digita `shell:startup`
-2. Crea un file `.bat` in questa cartella con:
-   ```batch
-   @echo off
-   cd /d "C:\percorso\della\cartella\card"
-   pythonw sd_card_importer.py
-   ```
-3. Salva come `SD_Importer.bat`
+### Display Secondario
+- `F11` - Fullscreen
+- `Esc` - Esci da fullscreen
 
-#### Metodo 2: Utilità di pianificazione
-1. Cerca "Utilità di pianificazione" in Windows
-2. Crea attività di base → Nome: "SD Card Importer"
-3. Trigger: All'avvio del computer
-4. Azione: Avvia programma → `pythonw.exe`
-5. Argomenti: percorso completo di `sd_card_importer.py`
-
-## Esempio di struttura cartelle create
+## 📁 Struttura Moduli
 
 ```
-C:\Users\TuoNome\Pictures\SD_Import\
-├── 2025-12-06\
-│   ├── 1\
-│   │   ├── IMG_001.jpg
-│   │   ├── IMG_002.jpg
-│   │   └── ...
-│   ├── 2\
-│   │   ├── IMG_050.jpg
-│   │   └── ...
-│   └── 3\
-│       └── ...
-└── 2025-12-07\
-    └── 1\
-        └── ...
+card/
+├── config.py                    # Configurazioni e costanti
+├── print_manager.py             # Gestione stampa con spooler
+├── photo_manager.py             # Gestione foto e importazione
+├── secondary_window.py          # Finestra visualizzazione secondaria
+├── professional_features.py     # Componenti UI professionali
+├── sd_card_importer2.py         # File principale
+└── print_log.json              # Log stampe (generato automaticamente)
 ```
 
-## Note
+## 🖨️ Come Funziona lo Spooler di Stampa
 
-- Il programma copia i file (non li sposta), quindi le foto rimarranno sulla scheda SD
-- Per eliminare le foto dalla SD dopo l'importazione, puoi farlo manualmente
-- Le notifiche Windows mostrano il progresso dell'importazione
-- Il programma rileva qualsiasi unità rimovibile (SD, USB, etc.)
+1. L'utente seleziona le foto e clicca "Stampa"
+2. Per ogni foto:
+   - Crea un job di stampa singolo
+   - Invia la foto alla stampante (1 foto = 1 foglio)
+   - Monitora lo stato del job con `win32print.EnumJobs()`
+   - **Attende che il job sia completato** prima di inviare la prossima
+3. La stampante gestisce le dimensioni finali (es. 15x20 cm)
+4. Log automatico di tutte le stampe
 
-## Troubleshooting
+### Testare con Windows PDF Printer
 
-**Errore "module not found":**
-Assicurati di aver installato le dipendenze con `pip install -r requirements.txt`
+⚠️ **IMPORTANTE**: Windows PDF Printer elabora i job quasi istantaneamente, quindi **NON è affidabile** per testare lo spooler.
 
-**Le notifiche non appaiono:**
-Verifica che le notifiche siano abilitate per Python nelle impostazioni di Windows
+È utile per:
+- ✅ Verificare che non ci siano errori nel codice
+- ✅ Controllare i PDF generati
+- ✅ Testare la logica base
 
-**Il programma non rileva la scheda SD:**
-Assicurati che la scheda SD sia riconosciuta da Windows in "Questo PC"
+Per test realistici serve una stampante fisica o di rete.
+
+## 🔧 Configurazione Stampante
+
+1. Vai in `Impostazioni > Stampanti` di Windows
+2. Imposta la tua stampante predefinita
+3. Configura formato carta (es. A4, 10x15 cm)
+4. Il programma rileverà automaticamente la stampante
+
+## 📊 Report Stampe
+
+Il programma registra automaticamente:
+- Data e ora di ogni stampa
+- Numero di foto stampate
+- Formato richiesto
+- Stampante utilizzata
+
+Report accessibile da: `Menu > Report Stampe` o `Ctrl+R`
+
+## 🐛 Troubleshooting
+
+### "SD card non trovata"
+- Verifica che la lettera unità in `config.py` sia corretta
+- Controlla che la SD sia inserita
+
+### "Errore caricamento stampanti"
+- Verifica che `pywin32` sia installato: `pip install pywin32`
+- Riavvia il programma
+
+### "Errore durante la stampa"
+- Controlla che la stampante sia accesa e online
+- Verifica carta e inchiostro
+- Guarda i log per dettagli: cerca `[ERROR]` nel terminale
+
+## 📝 Log e Debug
+
+Il programma stampa informazioni nel terminale:
+- `[LOG]` - Operazioni normali
+- `[SPOOLER]` - Stato job di stampa
+- `[ERROR]` - Errori
+- `[WARNING]` - Avvisi
+
+## 🔮 Sviluppi Futuri
+
+- [ ] Migrazione a PySide6 (se necessario per prestazioni)
+- [ ] Support Linux/Mac
+- [ ] Cloud backup automatico
+- [ ] OCR per riconoscimento testo nelle foto
+- [ ] Organizzazione automatica con AI
+
+## 📄 Licenza
+
+Uso personale/professionale
+
+## 👨‍💻 Autore
+
+Sviluppato con ❤️ e Claude Code

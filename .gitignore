@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build
+build/
+dist/
+*.spec
+
+# Logs & Temp
+*.log
+print_log.json
+bugfix.md
+
+# Scripts di lancio
+*.bat
+
+# Old files
+_old/
+
+# NPM cache (percorsi assoluti)
+*npm-cache/
